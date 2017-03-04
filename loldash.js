@@ -4,6 +4,9 @@
 // The iteratee function takes in three parameters: value, key, collection
 var forEach = function (collection, iteratee) {
   // your code here
+  for (var i in collection) {
+  	iteratee(collection[i], i, collection);
+  }
 };
 // example execution: forEach([1,2,3], function(v, k, c) { console.log(v) })
 // would output the following:
@@ -17,7 +20,12 @@ var forEach = function (collection, iteratee) {
 // Map is almost like forEach except it returns an array of values.
 var map = function (collection, iteratee) {
   // your code here
-}
+  var mapArray = [];
+  for (var i in collection) {
+  	mapArray.push(iteratee(collection[i], i, collection));
+  }
+  return mapArray;
+};
 // example execution: map([1,2,3], function(v, k, c) {return v *2 })
 // would return the following:
 // [2,4,6]
@@ -28,7 +36,14 @@ var map = function (collection, iteratee) {
 // The predicate takes in three parameters: value, index, collection
 var filter = function(collection, predicate) {
   // your code here
-}
+  var trueArray = [];
+  for (var i in collection) {
+  	if (predicate(collection[i], i, collection)){
+      trueArray.push(collection[i]);
+    }
+  }
+  return trueArray;
+};
 // example execution: filter([1,2,3,4], function(v,k,c) {return v % 2 === 0})
 // would return the following:
 // [2,4]
@@ -38,4 +53,4 @@ module.exports = {
   forEach: forEach,
   map: map,
   filter: filter
-}
+};
